@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#153e35">
+  <title>Mis finanzas · Un mes a la vez</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="index.html"><span class="brand-icon" aria-hidden="true">↗</span> mis finanzas<span class="brand-dot">.</span></a>
+    <div class="sidebar-body"><span class="overline">MI ESPACIO PERSONAL</span><div class="nav-item"><span aria-hidden="true">▦</span> Resumen mensual</div></div>
+    <div class="sidebar-note"><span class="note-symbol" aria-hidden="true">✳</span><h2>Un mes a la vez.</h2><p>Un poco de claridad para decidir mejor con tu dinero.</p></div>
+    <div class="local-note"><span class="status-dot"></span> Datos guardados en este navegador</div>
+  </aside>
+  <main>
+    <header><div><span class="overline">TU DINERO, MÁS CLARO</span><h1>Resumen del mes</h1><p class="muted">Todo lo que entra y sale, en un solo lugar.</p></div><label class="month-control">Mes del resumen<input id="month" type="month" required></label></header>
+    <div id="notice" role="status" class="notice" hidden></div>
+    <section class="summary" aria-label="Resumen mensual">
+      <article class="balance-card"><div class="card-label">Balance del mes <span aria-hidden="true">↗</span></div><strong id="balance">$0</strong><p>Ingresos menos gastos del mes</p></article>
+      <article class="stat-card"><div class="card-label">Ingresos <span class="stat-icon income" aria-hidden="true">↓</span></div><strong id="income">$0</strong><p id="income-count">0 movimientos</p></article>
+      <article class="stat-card"><div class="card-label">Gastos <span class="stat-icon expense" aria-hidden="true">↑</span></div><strong id="expense">$0</strong><p id="expense-count">0 movimientos</p></article>
+    </section>
+    <div class="workspace">
+      <div class="left-column">
+        <section class="panel form-panel"><div class="section-heading"><div><span class="overline">PASO A PASO</span><h2>Agregar movimiento</h2></div><span class="heading-icon" aria-hidden="true">＋</span></div>
+          <form id="movement-form">
+            <fieldset class="type-picker"><legend class="sr-only">Tipo de movimiento</legend><label><input type="radio" name="type" value="expense" checked><span>↑ Gasto</span></label><label><input type="radio" name="type" value="income"><span>↓ Ingreso</span></label></fieldset>
+            <label>Descripción<input id="description" name="description" placeholder="Ej. Supermercado" maxlength="100" required></label>
+            <div class="form-row"><label>Monto en pesos<input id="amount" name="amount" type="number" min="1" max="1000000000000" step="1" inputmode="numeric" placeholder="Ej. 25000" required></label><label>Fecha<input id="date" name="date" type="date" min="1900-01-01" max="9999-12-31" required></label></div>
+            <label>Categoría<select id="category" name="category" required></select></label>
+            <button class="primary" type="submit">Guardar movimiento <span aria-hidden="true">↗</span></button>
+            <p class="form-footnote">Montos en pesos chilenos (CLP), sin decimales.</p>
+          </form>
+        </section>
+        <section class="panel category-panel"><div class="section-heading"><h2>¿En qué gasté?</h2><span class="muted small">Este mes</span></div><div id="categories"></div></section>
+      </div>
+      <section class="panel movements-panel"><div class="section-heading"><div><span class="overline">EL DETALLE</span><h2>Mis movimientos <span id="movement-count" class="count">0</span></h2></div></div>
+        <div class="filter-row"><label class="search"><span class="sr-only">Buscar por descripción o categoría</span><input id="search" type="search" placeholder="Buscar un movimiento…"></label><label><span class="sr-only">Filtrar por tipo</span><select id="type-filter"><option value="all">Todos</option><option value="expense">Gastos</option><option value="income">Ingresos</option></select></label></div>
+        <div id="movements" class="movement-list"></div>
+        <div class="list-footer">Los totales incluyen todos los movimientos del mes.</div>
+      </section>
+    </div>
+    <footer><div><strong>Tu información se queda contigo.</strong><p>Se guarda en este navegador, sin sincronización entre dispositivos. Descarga un respaldo para conservarla.</p></div><div class="backup-actions"><button id="export" class="secondary" type="button">↓ Descargar respaldo</button><label class="import-button">Restaurar respaldo<input id="import" type="file" accept=".json,application/json" class="sr-only"></label></div></footer>
+  </main>
+  <dialog id="confirm-dialog"><form method="dialog"><h2 id="dialog-title">Confirmar</h2><p id="dialog-message"></p><div class="dialog-actions"><button class="secondary" value="cancel">Cancelar</button><button class="primary" value="confirm">Confirmar</button></div></form></dialog>
+</body>
+</html>

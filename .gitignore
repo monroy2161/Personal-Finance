@@ -1,0 +1,7 @@
+node_modules/
+.sites/
+*.tar.gz
+*.zip
+*respaldo*.json
+mis-finanzas-*.json
+.qa/
